@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import { getYearsBetween } from '../helper';
+import { calculateBrand } from '../helper';
 
 const Field = styled.div`
     display: flex;
@@ -81,14 +83,19 @@ const Form = () => {
 
         setError(false);
 
-        // get result between years
+        //base from £2000
+        let total = 2000;
 
-        // older = -3%
+        // get result between years
+        const yearSubstraction = getYearsBetween(year);
+        
+        // if car is older = -3%
+        total -= (( yearSubstraction * 3 ) * total) / 100;
 
         // american +15%
         // asian +5%
         // european +30%
-
+        total = calculateBrand(brand) * total;
 
         // third party insurance +20%
         // comprehensive insurance +50%
@@ -110,7 +117,7 @@ const Form = () => {
                 >
                     <option value="">-- Select a brand --</option>
                     <option value="american">American</option>
-                    <option value="europe">Europe</option>
+                    <option value="european">Europe</option>
                     <option value="asian">Asian</option>
                 </Select>
             </Field>

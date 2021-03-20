@@ -41,6 +41,14 @@ const Button = styled.button`
     }
 `;
 
+const Error = styled.div`
+    background-color: red;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+`;
+
 const Form = () => {
 
     const [ data, setData ] = useState({
@@ -48,6 +56,8 @@ const Form = () => {
         year: '',
         packeage: ''
     });
+
+    const [ error, setError ] = useState(false);
 
     // get values from state
     const { brand, year, packeage } = data;
@@ -60,8 +70,37 @@ const Form = () => {
         });
     }
 
+    //when user submit the form
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        if(brand.trim() === '' || year.trim() === '' || packeage.trim() === '') {
+            setError(true);
+            return;
+        }
+
+        setError(false);
+
+        // get result between years
+
+        // older = -3%
+
+        // american +15%
+        // asian +5%
+        // european +30%
+
+
+        // third party insurance +20%
+        // comprehensive insurance +50%
+
+        //total
+    }
+
     return ( 
-        <form>
+        <form onSubmit={handleSubmit}>
+
+            { error ? <Error>All fields are required</Error> : null }
+
             <Field>
                 <Label>Brand</Label>
                 <Select
@@ -114,7 +153,7 @@ const Form = () => {
                     onChange={getInfo}
                 />Comprehensive
             </Field>
-            <Button type="button">Get quote</Button>
+            <Button type="submit">Get quote</Button>
         </form>
      );
 }

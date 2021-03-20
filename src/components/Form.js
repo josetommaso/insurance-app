@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 const Field = styled.div`
@@ -42,11 +42,33 @@ const Button = styled.button`
 `;
 
 const Form = () => {
+
+    const [ data, setData ] = useState({
+        brand: '',
+        year: '',
+        packeage: ''
+    });
+
+    // get values from state
+    const { brand, year, packeage } = data;
+
+    // get values from form and put them into the state
+    const getInfo = e => {
+        setData({
+            ...data,
+            [e.target.name] : e.target.value
+        });
+    }
+
     return ( 
         <form>
             <Field>
                 <Label>Brand</Label>
-                <Select>
+                <Select
+                    name="brand"
+                    value={brand}
+                    onChange={getInfo}
+                >
                     <option value="">-- Select a brand --</option>
                     <option value="american">American</option>
                     <option value="europe">Europe</option>
@@ -56,7 +78,11 @@ const Form = () => {
 
             <Field>
                 <Label>Year</Label>
-                <Select>
+                <Select
+                    name="year"
+                    value={year}
+                    onChange={getInfo}
+                >
                     <option value="">-- Select a year --</option>
                     <option value="2021">2021</option>
                     <option value="2020">2020</option>
@@ -77,11 +103,15 @@ const Form = () => {
                     type="radio"
                     name="packeage"
                     value="third-party"
+                    checked={packeage === 'third-party'}
+                    onChange={getInfo}
                 />Third party
                 <InputRadio 
                     type="radio"
                     name="packeage"
                     value="comprehensive"
+                    checked={packeage === 'comprehensive'}
+                    onChange={getInfo}
                 />Comprehensive
             </Field>
             <Button type="button">Get quote</Button>

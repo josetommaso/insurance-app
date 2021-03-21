@@ -34,7 +34,7 @@ const Result = ({quote}) => {
         (
         <ResultQuote>
             <TransitionGroup
-                component="p"
+                component="span"
                 className="resultado"
             >
                 <CSSTransition
@@ -42,7 +42,7 @@ const Result = ({quote}) => {
                     key={quote}
                     timeout={{ enter: 500, exit: 500 }}
                 >
-                    <TextQuote>Annual Premium: £{ quote }</TextQuote>
+                    <TextQuote>Annual Premium: £<span>{ quote }</span></TextQuote>
                 </CSSTransition>
             </TransitionGroup>
         </ResultQuote>
@@ -51,7 +51,7 @@ const Result = ({quote}) => {
 }
 
 Result.propTypes = {
-    title: PropTypes.object.isRequired,
+    quote: PropTypes.number.isRequired,
 }
  
 export default Result;

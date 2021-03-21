@@ -114,7 +114,7 @@ const Form = ({setSummary, setLoading}) => {
         setTimeout(() => {
             setLoading(false);
             setSummary({
-                quote: total,
+                quote: Number(total),
                 data
             });
         }, 3000);

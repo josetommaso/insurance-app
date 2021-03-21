@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { getYearsBetween } from '../helper';
 import { calculateBrand } from '../helper';
+import { getPackeage } from '../helper';
 
 const Field = styled.div`
     display: flex;
@@ -51,7 +52,7 @@ const Error = styled.div`
     margin-bottom: 2rem;
 `;
 
-const Form = () => {
+const Form = ({setSummary}) => {
 
     const [ data, setData ] = useState({
         brand: '',
@@ -99,8 +100,17 @@ const Form = () => {
 
         // third party insurance +20%
         // comprehensive insurance +50%
+        const incrementPackeage = getPackeage(packeage);
+
 
         //total
+        total = parseFloat(incrementPackeage * total).toFixed(2);
+        console.log(total);
+
+        setSummary({
+            quote: total,
+            data
+        })
     }
 
     return ( 
@@ -148,8 +158,8 @@ const Form = () => {
                 <InputRadio 
                     type="radio"
                     name="packeage"
-                    value="third-party"
-                    checked={packeage === 'third-party'}
+                    value="third party"
+                    checked={packeage === 'third party'}
                     onChange={getInfo}
                 />Third party
                 <InputRadio 

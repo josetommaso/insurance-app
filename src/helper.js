@@ -24,3 +24,13 @@ export function calculateBrand(brand) {
     }
     return increment;
 }
+
+// calculation type of insurance packeage
+export function getPackeage(packeage) {
+    return (packeage === 'third-party') ? 1.20 : 1.50
+}
+
+// Capital letters summary
+// export function capitalLetter(text) {
+//     return text.charAt(0).toUpperCase() + text.slice(1);
+// }

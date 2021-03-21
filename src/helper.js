@@ -27,7 +27,7 @@ export function calculateBrand(brand) {
 
 // calculation type of insurance packeage
 export function getPackeage(packeage) {
-    return (packeage === 'third-party') ? 1.20 : 1.50
+    return (packeage === 'third party') ? 1.20 : 1.50
 }
 
 // Capital letters summary

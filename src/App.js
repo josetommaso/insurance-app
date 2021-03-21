@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import Header from './components/Header';
 import Form from './components/Form';
 import Summary from './components/Summary';
+import Result from './components/Result';
+import Spinner from './components/Spinner';
 import styled from '@emotion/styled';
 
 
@@ -25,7 +27,10 @@ function App() {
       packeage: ''
     }
   });
-  const { data } = summary
+
+  const [ loading, setLoading ] = useState(false);
+
+  const { quote, data } = summary
 
   return (
     <Container>
@@ -35,10 +40,30 @@ function App() {
         <ContainerForm>
           <Form
             setSummary={setSummary}
+            setLoading={setLoading}
           />
-          <Summary 
-            data={data}
-          />
+
+          { loading ? <Spinner /> : null }
+
+          
+          
+
+          { !loading ?
+            (
+            <Fragment>
+              <Summary 
+                data={data}
+              />
+              <Result
+                quote={quote}
+              />
+            </Fragment>
+            )
+          : 
+            null
+          }
+
+          
         </ContainerForm>
     </Container>
   );

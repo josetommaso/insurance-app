@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { getYearsBetween } from '../helper';
 import { calculateBrand } from '../helper';
 import { getPackeage } from '../helper';
+import PropTypes from 'prop-types';
 
 const Field = styled.div`
     display: flex;
@@ -52,7 +53,7 @@ const Error = styled.div`
     margin-bottom: 2rem;
 `;
 
-const Form = ({setSummary}) => {
+const Form = ({setSummary, setLoading}) => {
 
     const [ data, setData ] = useState({
         brand: '',
@@ -105,12 +106,19 @@ const Form = ({setSummary}) => {
 
         //total
         total = parseFloat(incrementPackeage * total).toFixed(2);
-        console.log(total);
 
-        setSummary({
-            quote: total,
-            data
-        })
+        //display spinner
+        setLoading(true);
+
+        // hide spinner and show total
+        setTimeout(() => {
+            setLoading(false);
+            setSummary({
+                quote: total,
+                data
+            });
+        }, 3000);
+
     }
 
     return ( 
@@ -173,6 +181,11 @@ const Form = ({setSummary}) => {
             <Button type="submit">Get quote</Button>
         </form>
      );
+}
+
+Form.propTypes = {
+    setSummary: PropTypes.func.isRequired,
+    setLoading: PropTypes.func.isRequired
 }
  
 export default Form

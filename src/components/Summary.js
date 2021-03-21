@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-
+import PropTypes from 'prop-types';
 
 const ContainerSummary = styled.div`
     padding: 1rem;
@@ -27,6 +27,10 @@ const Summary = ({data}) => {
             </ul>
         </ContainerSummary>
      );
+}
+
+Summary.propTypes = {
+    data: PropTypes.object.isRequired,
 }
  
 export default Summary;
